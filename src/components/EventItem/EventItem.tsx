@@ -16,8 +16,8 @@ export default function EventItem(props: Props) {
     return (
         <div
             className={mergeClassesNames([styles["root"], props.className])}
-            onClick={()=>props.onShowDetails(props.event)} 
-            style={props.style}>
+            onClick={()=>props.onShowDetails(props.event)}
+            style={{...props.style, backgroundColor: ThemeColors.Random}}>
             <div className={styles["icon-container"]} >
                 <img src="/images/idea-icon.png"/>
             </div>

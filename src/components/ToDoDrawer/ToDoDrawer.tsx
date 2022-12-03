@@ -40,7 +40,7 @@ export default function ToDoDrawer(props: Props) {
                 items={props.toDos}
                 header={
                     <div className={styles["header"]}>
-                        Twoje zadania
+                        <div>Twoje zadania</div>
                         <img src="/images/add-icon.png"/>
                     </div>
                 }
