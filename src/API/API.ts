@@ -2,7 +2,7 @@ import { Position } from "../GeoLocation";
 import DateRange from "../utils/DateRange";
 import { normalizeLength, Side } from "../utils/formatHour";
 import { TimeEnum } from "../utils/TimeEnum";
-import MyEvent from "./MyEvent";
+import MyEvent, { MyCustomEvent } from "./MyEvent";
 import MyMeeting from "./MyMeeting";
 import MyToDo from "./MyToDo";
 
@@ -54,12 +54,14 @@ export default class API {
         })
     }
 
-    async getCustomEvents(): Promise<MyEvent[]> {
-        const rawEvents = await this.genericGet<MyEvent[]>(["custom"])
+    async getCustomEvents(): Promise<MyCustomEvent[]> { 
+        const rawEvents = await this.genericGet<MyCustomEvent[]>(["events", "custom"])
         return rawEvents.map(it => {
+            const raw = JSON.parse(it.dateRange as any as string)
+
             return {
                 ...it,
-                dateRange: new DateRange(new Date(it.dateRange.from), new Date(it.dateRange.to))
+                dateRange: new DateRange(new Date(raw.from), new Date(raw.to))
             }
         })
     }
