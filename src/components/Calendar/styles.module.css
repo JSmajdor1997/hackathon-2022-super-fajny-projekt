@@ -1,7 +1,34 @@
 .root {
     display: flex;
-    justify-content: center;
+    position: relative;
+}
+
+.current-time-indicator {
+    position: absolute;
+    pointer-events: none;
+}
+
+.event-container {
+    position: absolute;
+    margin-left: 10%;
+    width: 90%;
+}
+
+.time-scale-container {
+    position: absolute;
+    display: flex;
+    width: 100%;
     align-items: center;
-    background-color: green;
+}
+
+.time-scale-label {
+    margin-left: 2px;
+    font-size: 12px;
+}
+
+.time-scale-line {
+    height: 1px;
+    background-color: black;
+    margin-left: 10px;
     flex: 1;
 }
