@@ -6,7 +6,6 @@ import React from "react"
 import DifficultyDisplay from "../DifficultyDisplay/DifficultyDisplay"
 import formatHour from "../../utils/formatHour"
 import ReactSlider from 'react-slider'
-import GoogleMapReact from "google-map-react"
 
 export interface Props {
     event: MyEvent | null
@@ -22,9 +21,9 @@ export default function EventDetailsDrawer(props: Props) {
                 <div className={styles["header"]}>
                     <div className={styles["title"]}>
                         {summary}
-                    </div>
 
-                    <DifficultyDisplay className={styles["difficulty"]} difficulty={difficulty}/>
+                        <DifficultyDisplay color="black" difficulty={difficulty}/>
+                    </div>
     
                     <div className={styles["hour"]}>
                         {formatHour(dateRange.from)}
@@ -41,24 +40,19 @@ export default function EventDetailsDrawer(props: Props) {
     
                 <div className={styles["progress"]}>
                     <ReactSlider
-                    value={1}
+                    value={0}
                     min={0}
                     max={100}
-                        className={styles["difficulty-slider"]}
-                        thumbClassName={styles["difficulty-thumb"]}
-                        trackClassName={styles["difficulty-track"]}
+                    onChange={it => console.log(it)}
+                        className={styles["progress-slider"]}
+                        thumbClassName={styles["progress-thumb"]}
+                        trackClassName={styles["progress-track"]}
                         renderThumb={(props, state) => <div {...props}/>}
                     />
                 </div>
 
                 <div className={styles["map-container"]}>
-                    <GoogleMapReact
-                        bootstrapURLKeys={{ key: "AIzaSyCYfZS0gWEtQ9cbGPRh8FA3A4bekhPiCfE" }}
-                        yesIWantToUseGoogleMapApiInternals
-                        onGoogleApiLoaded={({ map, maps }) => {}}
-                        >
-                        
-                    </GoogleMapReact>
+                    Jestem sobie mapą
                 </div>
             </React.Fragment>
         )
@@ -66,11 +60,14 @@ export default function EventDetailsDrawer(props: Props) {
 
     return (
         <Drawer
+            overlayColor="white"
             open={props.event != null}
             onClose={props.onClose}
             direction="bottom"
             className={styles["root"]}>
-                {props.event == null ? null : renderContent(props.event)}
+                <div className={styles["content-container"]}>
+                    {props.event == null ? null : renderContent(props.event)}
+                </div>
         </Drawer>
-)
+    )
 }

@@ -8,9 +8,9 @@ import styles from "./styles.module.css"
 import { TimeEnum } from "../../utils/TimeEnum";
 import API from "../../API/API";
 import MyEvent from "../../API/MyEvent";
-import EventDetailsDrawer from "../../components/EventDetailsDrawer/EventDetailsDrawer";
 import { RoutesEnum } from "../RoutesEnum";
 import EventItem from "../../components/EventItem/EventItem";
+import EventDetailsDrawer from "../../components/EventDetailsDrawer/EventDetailsDrawer";
 
 export default function Main() {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -19,7 +19,7 @@ export default function Main() {
   const [events, setEvents] = useState<MyEvent[]>([])
   useEffect(() => {
     new API().getEvents(currentDate).then(setEvents)
-  })
+  }, [])
 
   const navigate = useNavigate()
 
@@ -49,28 +49,27 @@ export default function Main() {
         date={currentDate} 
         isHamburgerOn={isToDoDrawerOpen}
         onHamburgerStateChanged={onHamburgerStateChanged}/>
+      
+      <div className={styles["scrollable"]}>
+        <Calendar<MyEvent>
+          className={styles["calendar"]}
+          events={events}
+          date={currentDate}
+          renderEvent={event => (
+            <EventItem 
+              event={event} 
+              onShowDetails={onEventClick}/>
+          )}/>
 
-      <Calendar<MyEvent>
-        events={events}
-        date={currentDate}
-        style={{width: "100%", height: "200vh", backgroundColor: "red"}}
-        renderEvent={event => (
-          <EventItem 
-            event={event} 
-            onShowDetails={onEventClick}/>
-        )}/>
-        
-      <div style={{flex: 1, position: "fixed", bottom: 0, left: 0}}>
-        <button onClick={onLogout}>wyloguj</button>
+        <ToDoDrawer 
+          isOpen={isToDoDrawerOpen} 
+          onClose={onToDoDrawerClose}
+          onLogOut={onLogout}/>
+
+        <EventDetailsDrawer 
+          event={eventForDetails}
+          onClose={onEventDetailsDrawerClose}/>
       </div>
-
-      <ToDoDrawer 
-        isOpen={isToDoDrawerOpen} 
-        onClose={onToDoDrawerClose}/>
-
-      <EventDetailsDrawer 
-        event={eventForDetails}
-        onClose={onEventDetailsDrawerClose}/>
     </div>
   );
 }

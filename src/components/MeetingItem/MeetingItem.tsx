@@ -17,9 +17,9 @@ export default function MeetingItem(props: Props) {
             <SimpleList
                 className={styles["info-container"]}
                 header={<div className={styles["name"]}>Elon Piżmo</div>}
-                items={["środa 6.11, 17:00", "środa 6.11, 17:00", "środa 6.11, 17:00"]}
+                items={["środa 6.11, 17:00", "środa 6.12, 17:00", "środa 6.13, 17:00"]}
                 renderItem={it => (
-                    <div>
+                    <div key={it} className={styles["time-suggestion"]}>
                         {it}
                     </div>
                 )}/>

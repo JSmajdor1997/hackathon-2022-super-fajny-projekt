@@ -5,19 +5,29 @@ import mergeClassesNames from "../../utils/mergeClassNames"
 import SimpleList from "../SimpleList/SimpleList"
 import MeetingItem from "../MeetingItem/MeetingItem"
 import TaskItem from "../TaskItem/TaskItem"
+import NavBar from "../NavBar/NavBar"
+import SimpleButton from "../SimpleButton/SimpleButton"
+import { Difficulty } from "../../API/MyEvent"
 
 export interface Props {
     isOpen: boolean
     onClose: ()=>void
+
+    onLogOut: ()=>void
 }
 
 export default function ToDoDrawer(props: Props) {
     return (
         <Drawer
+            size="100vw"
+            overlayColor="white"
             open={props.isOpen}
             onClose={props.onClose}
             direction="right"
             className={styles["root"]}>
+            <NavBar isHamburgerOn={props.isOpen} onHamburgerStateChanged={props.onClose}/>
+
+            <div className={styles["content-container"]}>
             <SimpleList 
                 items={["1", "2"]}
                 header={
@@ -28,7 +38,7 @@ export default function ToDoDrawer(props: Props) {
                 } 
                 className={styles["tasks-section"]}
                 renderItem={it => (
-                    <TaskItem/>
+                    <TaskItem key={it} difficulty={Difficulty.Easy}/>
             )}/>
 
             <div className={styles["middle-section"]}>
@@ -53,14 +63,19 @@ export default function ToDoDrawer(props: Props) {
 
             <SimpleList 
                 items={["1", "2"]}
-                header="A może spotkanie?" 
+                header={
+                    <div className={styles["header"]}>
+                        A może spotkanie?
+                    </div>
+                }
                 className={styles["meetings-section"]}
                 renderItem={it => (
-                    <MeetingItem/>
+                    <MeetingItem key={it}/>
                 )}/>
-            
-            <div className={styles["logout-section"]}>
-                Wyloguj
+
+            <SimpleButton onClick={props.onLogOut} className={styles["logout-button"]}>
+                Wyloguj się
+            </SimpleButton>
             </div>
         </Drawer>
 )

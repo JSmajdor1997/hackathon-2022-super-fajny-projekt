@@ -4,7 +4,7 @@ import { Sling as Hamburger } from 'hamburger-react'
 export interface Props {
     isHamburgerOn: boolean
     onHamburgerStateChanged: (newState: boolean) => void
-    date: Date
+    date?: Date
 }
 
 export default function NavBar(props: Props) {
@@ -13,17 +13,30 @@ export default function NavBar(props: Props) {
     return (
         <div className={styles["root"]}>
             <div className={styles["upper-part"]}>
-                <div>
-                    {formatDate(date)}
-                </div>
+                <Hamburger size={28} toggled={isHamburgerOn} color="black" toggle={()=>onHamburgerStateChanged(!isHamburgerOn)} />
+            </div>
 
-                <div>
-                    <Hamburger toggled={isHamburgerOn} color="white" toggle={()=>onHamburgerStateChanged(!isHamburgerOn)} />
-                </div>
-            </div>
-            <div>
-                {date.toLocaleDateString("pl-PL", {weekday: "long"})}
-            </div>
+            {
+                date== null ? 
+                    null : 
+                    <div className={styles["lower-part"]}>
+                    <div className={styles["day-name-label"]}>
+                        {date.toLocaleDateString("pl-PL", {weekday: "long"})}
+                    </div>
+
+                    <div className={styles["date-container"]}>
+                        <div className={styles["bold-label"]}>
+                            {date.getDate()}
+                        </div>
+                        &nbsp;
+                        <div className={styles["bold-label"]}>
+                            {date.toLocaleDateString("pl-PL", {month: "long"})}
+                        </div>
+                        &nbsp;
+                        {date.getFullYear()}
+                    </div>
+                    </div>
+            }
         </div>
     )
 }

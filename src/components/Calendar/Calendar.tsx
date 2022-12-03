@@ -83,7 +83,7 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
                     className={styles["time-scale-container"]} 
                     style={{marginTop: index * TimeEnum.Hour * pxPerMs}}>
                     <div className={styles["time-scale-label"]}>
-                        {normalizeLength((index+1).toString(), 2, '0', Side.Left)}:00
+                        {normalizeLength((index).toString(), 2, '0', Side.Left)}:00
                     </div>
 
                     <div className={styles["time-scale-line"]}/>
@@ -98,7 +98,7 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
         const marginTop = (now.getHours() * TimeEnum.Hour + now.getMinutes() * TimeEnum.Minute) * pxPerMs
 
         return (
-            <div className={styles["current-time-indicator"]} style={{height: 10, width: "100%", marginTop, backgroundColor: "blue" }}>A</div>
+            <div className={styles["current-time-indicator"]} style={{marginTop}}/>
         )
     }
 

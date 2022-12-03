@@ -1,4 +1,5 @@
 import MyEvent, { Difficulty } from "../../API/MyEvent"
+import Theme from "../../Theme"
 import formatHour from "../../utils/formatHour"
 import mergeClassesNames from "../../utils/mergeClassNames"
 import Styllable from "../../utils/Styllable"
@@ -9,12 +10,6 @@ export interface Props extends Styllable {
     onShowDetails: (event: MyEvent)=>void
 }
 
-const difficultyToColors: {[key in Difficulty]: string} = {
-    [Difficulty.Easy]: "green",
-    [Difficulty.Medium]: "yellow",
-    [Difficulty.Hard]: "red",
-}
-
 export default function EventItem(props: Props) {
     const {summary, location, difficulty, description, dateRange} = props.event
 
@@ -22,7 +17,7 @@ export default function EventItem(props: Props) {
         <div
             className={mergeClassesNames([styles["root"], props.className])}
             onClick={()=>props.onShowDetails(props.event)} 
-            style={{...props.style, backgroundColor: difficultyToColors[difficulty]}}>
+            style={{...props.style, backgroundColor: Theme.difficultyToColor(difficulty)}}>
             <div className={styles["icon-container"]}>
                 <img src="/images/idea-icon.png"/>
             </div>

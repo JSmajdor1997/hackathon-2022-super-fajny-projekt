@@ -1,0 +1,11 @@
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    font-size: 10px;
+    transition: all 0.1s;
+    transform-origin: center center;
+    box-sizing: border-box;
+    letter-spacing: 3px;
+}

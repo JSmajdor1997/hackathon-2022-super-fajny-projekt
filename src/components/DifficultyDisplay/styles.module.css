@@ -1,17 +1,13 @@
 .root {
     display: flex;
     justify-content: space-between;
+    width: 50px;
 }
 
 .dot-outline {
     border-radius: 100%;
     border-width: 1px;
-    border-color: black;
     border-style: solid;
-    width: 15px;
-    height: 15px;
-}
-
-.dot-full {
-    background-color: black;
+    width: 10px;
+    height: 10px;
 }

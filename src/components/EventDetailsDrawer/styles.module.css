@@ -4,45 +4,69 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    overflow: hidden;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .header {
     display: flex;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    justify-content: space-between;
+}
+
+.difficulty {
+    width: 100px;
+    height: 100px
 }
 
 .location {
-    background-color: red;
+
 }
 
 .description {
-    background-color: pink;
+
 }
 
 .progress {
-    background-color: blue;
     width: 100%;
     height: 100px;
 }
 
-.difficulty-slider {
+.progress-slider {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 20px;
+    overflow: hidden;
 }
 
-.difficulty-thumb {
+.progress-thumb {
     width: 15px;
     height: 15px;
     background-color: pink;
 }
 
-.difficulty-track {
+.progress-track {
     width: 100%;
+    max-width: 100%;
     height: 5px;
     background-color: green;
 }
 
 .map-container {
-    
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

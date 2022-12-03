@@ -2,13 +2,13 @@
     border-radius: 10px;
     border-width: 2px;
     border-style: solid;
-    border-color: black;
+    border-color: #000000;
     display: flex;
+    margin-top: 10px;
 }
 
 .photo-container {
     display: flex;
-    flex: 1;
     padding: 10px;
 }
 
@@ -19,5 +19,16 @@
 }
 
 .info-container {
-    
+    flex: 1;
+    align-items: center;
+}
+
+.name {
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+
+.time-suggestion {
+
 }

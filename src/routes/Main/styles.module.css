@@ -1,8 +1,20 @@
 .root {
-    background-color: #4158D0;
-    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
     width: 100vw;    
     height: 100vh;  
     display: flex;
     flex-direction: column;  
+    overflow: hidden;
+}
+
+.scrollable {
+    flex: 1;
+    overflow-y: scroll;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.calendar {
+    flex: 1;
+    height: 200vh;
+    margin-top: 20px;
 }

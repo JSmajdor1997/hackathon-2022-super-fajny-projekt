@@ -6,7 +6,26 @@
 
 .upper-part {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.lower-part {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 22px;
+}
+
+.bold-label {
+    font-weight: bold;
+}
+
+.day-name-label {
+
+}
+
+.date-container {
+    display: flex;
 }
