@@ -1,5 +1,4 @@
 import MyEvent from "../../API/MyEvent"
-import Theme from "../../Theme"
 import formatHour from "../../utils/formatHour"
 import mergeClassesNames from "../../utils/mergeClassNames"
 import Styllable from "../../utils/Styllable"
@@ -17,7 +16,7 @@ export default function EventItem(props: Props) {
         <div
             className={mergeClassesNames([styles["root"], props.className])}
             onClick={()=>props.onShowDetails(props.event)} 
-            style={{...props.style, backgroundColor: Theme.difficultyToColor(difficulty)}}>
+            style={{...props.style}}>
             <div className={styles["icon-container"]}>
                 <img src="/images/idea-icon.png"/>
             </div>

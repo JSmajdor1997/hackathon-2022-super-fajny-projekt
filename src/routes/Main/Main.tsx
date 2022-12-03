@@ -13,6 +13,9 @@ import EventItem from "../../components/EventItem/EventItem";
 import EventDetailsDrawer from "../../components/EventDetailsDrawer/EventDetailsDrawer";
 import GeoLocation from "../../GeoLocation";
 import MyMeeting from "../../API/MyMeeting";
+import formatHour from "../../utils/formatHour";
+import addToDate from "../../utils/addToDate";
+import { Difficulty } from "../../API/Difficulty";
 
 export default function Main() {
   const [currentDate, setCurrentDate] = useState(new Date())
@@ -60,8 +63,19 @@ export default function Main() {
       <div className={styles["scrollable"]}>
         <Calendar<MyEvent>
           className={styles["calendar"]}
-          events={events}
+          events={[...events, ...(events.findIndex(it => it.id == eventForDetails?.id)==-1 && eventForDetails != null ? [eventForDetails] : [])]}
           date={currentDate}
+          onAddEventRequest={newDate => setEventForDetails({
+            dateRange: new DateRange(newDate, addToDate(newDate, TimeEnum.Hour)),
+            id: "",
+            summary: "Tytuł",
+            description: "Opis",
+            location: null,
+            tag: [],
+            difficulty: Difficulty.Easy,
+            progress: 0,
+            travelTimeMs: 0
+          })}
           renderEvent={event => (
             <EventItem 
               event={event} 

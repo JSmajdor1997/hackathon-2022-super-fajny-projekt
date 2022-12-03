@@ -1,5 +1,4 @@
 import { Difficulty } from "../../API/Difficulty"
-import Theme from "../../Theme"
 import mergeClassesNames from "../../utils/mergeClassNames"
 import Styllable from "../../utils/Styllable"
 import DifficultyDisplay from "../DifficultyDisplay/DifficultyDisplay"
@@ -15,7 +14,7 @@ export default function TaskItem(props: Props) {
     return (
         <div 
             className={mergeClassesNames([styles["root"], props.className])} 
-            style={{backgroundColor: Theme.difficultyToColor(difficulty), ...props.style}}>
+            style={props.style}>
             <div className={styles["header"]}>
                 Zjeść obiad
             </div>

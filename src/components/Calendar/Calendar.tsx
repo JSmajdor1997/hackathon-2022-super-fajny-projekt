@@ -14,6 +14,7 @@ export interface Event {
 
 export interface Props<T extends Event> extends Styllable {
     date: Date
+    onAddEventRequest: (startingDate: Date)=>void
 
     events: T[]
     renderEvent: (event: T)=>ReactElement
@@ -102,6 +103,36 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
         )
     }
 
+    private firstClickDate: Date | null = null
+    private onMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if(this.firstClickDate == null) {
+            this.firstClickDate = new Date();
+
+            return;
+        }
+
+        const rootBoundingRect = this.rootRef.current?.getBoundingClientRect()
+    
+        if(rootBoundingRect != null && (new Date().getTime() - this.firstClickDate.getTime()) < TimeEnum.Second*0.5) {
+            const clickedOffset = e.clientY - rootBoundingRect.top - 100 + this.rootRef.current!.offsetTop;
+            const ms = clickedOffset / this.state.rootHeight * (TimeEnum.Hour*24)
+
+            const newDate = new Date(this.props.date)
+            newDate.setHours(0)
+            newDate.setMinutes(0)
+            newDate.setSeconds(0)
+            newDate.setMilliseconds(0)
+            newDate.setTime(newDate.getTime() + ms)
+
+            this.props.onAddEventRequest(newDate)
+        }
+
+        this.firstClickDate = null
+
+        e.preventDefault()
+        e.stopPropagation()
+    }
+
     render() {
         const {style, className, events} = this.props
 
@@ -109,7 +140,8 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
             <div 
                 ref={this.rootRef} 
                 style={style} 
-                className={mergeClassesNames([styles["root"], className])}>
+                className={mergeClassesNames([styles["root"], className])}
+                onMouseDown={this.onMouseDown}>
                 {this.renderTimeScales()}
 
                 {this.renderCurrentTimeIndicator()}
