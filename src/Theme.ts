@@ -5,7 +5,7 @@ export default class Theme {
         const map: {[key in Difficulty]: string} = {
             [Difficulty.Easy]: "#43978D",
             [Difficulty.Medium]: "#F0A719",
-            [Difficulty.Hard]: "#E15B35",
+            [Difficulty.Hard]: "#E15B35"
         }
 
         return map[difficulty] ?? map[Difficulty.Easy]
