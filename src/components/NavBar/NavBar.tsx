@@ -40,11 +40,3 @@ export default function NavBar(props: Props) {
         </div>
     )
 }
-
-function formatDate(date: Date): string {
-    const dateNr = date.getDate()
-    const monthName = date.toLocaleString('pl-PL', { month: 'long' })
-    const year = date.getFullYear()
-
-    return `${dateNr} ${monthName} ${year}`
-}

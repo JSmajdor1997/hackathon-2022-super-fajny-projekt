@@ -6,6 +6,7 @@ import Styllable from "../../utils/Styllable"
 import { TimeEnum } from "../../utils/TimeEnum"
 import styles from "./styles.module.css"
 import { normalizeLength, Side } from "../../utils/formatHour"
+import { ThemeColors } from "../../ThemeColors"
 
 export interface Event {
     dateRange: DateRange
@@ -17,6 +18,7 @@ export interface Props<T extends Event> extends Styllable {
     onAddEventRequest: (startingDate: Date)=>void
 
     events: T[]
+    customEvents: T[]
     renderEvent: (event: T)=>ReactElement
 }
 
@@ -76,7 +78,7 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
     private readonly renderTimeScales = () => {            
         const pxPerMs = this.state.rootHeight / (TimeEnum.Hour*24)
 
-        return new Array<number>(24)
+        return new Array<number>(25)
             .fill(0)
             .map((_, index)=>(
                 <div 
@@ -99,7 +101,9 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
         const marginTop = (now.getHours() * TimeEnum.Hour + now.getMinutes() * TimeEnum.Minute) * pxPerMs
 
         return (
-            <div className={styles["current-time-indicator"]} style={{marginTop}}/>
+            <div className={styles["current-time-indicator"]} style={{marginTop}}>
+                <div className={styles["current-time-indicator-line"]}/>
+            </div>
         )
     }
 
@@ -134,7 +138,7 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
     }
 
     render() {
-        const {style, className, events} = this.props
+        const {style, className, events, customEvents} = this.props
 
         return (
             <div 
@@ -146,6 +150,7 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
 
                 {this.renderCurrentTimeIndicator()}
 
+                {customEvents.map(this.renderEventContainer)}
                 {events.map(this.renderEventContainer)}
             </div>
         )

@@ -1,4 +1,5 @@
 import { Difficulty } from "../../API/Difficulty"
+import { ThemeColors } from "../../ThemeColors"
 import mergeClassesNames from "../../utils/mergeClassNames"
 import Styllable from "../../utils/Styllable"
 import DifficultyDisplay from "../DifficultyDisplay/DifficultyDisplay"
@@ -6,23 +7,30 @@ import styles from "./styles.module.css"
 
 export interface Props extends Styllable {
     difficulty: Difficulty
+    name: string
 }
 
 export default function TaskItem(props: Props) {
-    const {difficulty} = props
+    const {difficulty, name} = props
+
+    const colorsMap = {
+        [Difficulty.Easy]: ThemeColors.SelfCare,
+        [Difficulty.Medium]: ThemeColors.Yellow,
+        [Difficulty.Hard]: ThemeColors.Work,
+    }
 
     return (
         <div 
             className={mergeClassesNames([styles["root"], props.className])} 
-            style={props.style}>
+            style={{backgroundColor: colorsMap[difficulty], ...props.style}}>
             <div className={styles["header"]}>
-                Zjeść obiad
+                {name}
             </div>
 
             <DifficultyDisplay 
                 color="white"
                 className={styles["difficulty"]}
-                difficulty={Difficulty.Easy}/>
+                difficulty={difficulty}/>
         </div>
     )
 }

@@ -9,6 +9,7 @@ import NavBar from "../NavBar/NavBar"
 import SimpleButton from "../SimpleButton/SimpleButton"
 import MyMeeting from "../../API/MyMeeting"
 import { Difficulty } from "../../API/Difficulty"
+import MyToDo from "../../API/MyToDo"
 
 export interface Props {
     isOpen: boolean
@@ -17,6 +18,7 @@ export interface Props {
     onLogOut: ()=>void
 
     meetings: MyMeeting[]
+    toDos: MyToDo[]
     onOpenSettings: ()=>void
     onMuteApp: ()=>void
     onAddTask: ()=>void
@@ -35,7 +37,7 @@ export default function ToDoDrawer(props: Props) {
 
             <div className={styles["content-container"]}>
             <SimpleList 
-                items={["1", "2"]}
+                items={props.toDos}
                 header={
                     <div className={styles["header"]}>
                         Twoje zadania
@@ -43,8 +45,8 @@ export default function ToDoDrawer(props: Props) {
                     </div>
                 }
                 className={styles["tasks-section"]}
-                renderItem={it => (
-                    <TaskItem key={it} difficulty={Difficulty.Easy}/>
+                renderItem={(it) => (
+                    <TaskItem name={it.name} key={it.name} difficulty={it.difficulty}/>
             )}/>
 
             <div className={styles["middle-section"]}>

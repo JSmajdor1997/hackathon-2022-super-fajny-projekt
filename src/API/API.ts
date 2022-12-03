@@ -13,11 +13,26 @@ export interface ServerResponse {
 export default class API {
     private readonly serverPath = "https://c20f-157-158-99-97.eu.ngrok.io/api/v1"
 
-    private async genericPost<T>(method: "get" | "post", paths: string[]): Promise<T> {
+    private async genericPost<T, E>(paths: string[], body: E): Promise<T> {
+        const pathsAsString = paths.reduce((acc, it) => acc + `/${it}`)
+
+        const rsp = await fetch(`${this.serverPath}/${pathsAsString}`, {
+            method: "post",
+            body: JSON.stringify(body),
+            headers: [
+                ["ngrok-skip-browser-warning", "true"]
+            ]
+        })
+
+        const json = await rsp.json()
+        return json;
+    }
+
+    private async genericGet<T>(paths: string[]): Promise<T> {
         const pathsAsString = paths.reduce((acc, it) => acc + `/${it}`)
         
         const rsp = await fetch(`${this.serverPath}/${pathsAsString}`, {
-            method: method,
+            method: "get",
             headers: [
                 ["ngrok-skip-browser-warning", "true"]
             ]
@@ -30,7 +45,17 @@ export default class API {
     async getEvents(date: Date): Promise<MyEvent[]> {
         const dateAsString = `${date.getFullYear()}-${normalizeLength((date.getMonth()+1).toString(), 2, '0', Side.Left)}-${normalizeLength(date.getDate().toString(), 2, '0', Side.Left)}`
 
-        const rawEvents = await this.genericPost<MyEvent[]>("get", ["events", dateAsString])
+        const rawEvents = await this.genericGet<MyEvent[]>(["events", dateAsString])
+        return rawEvents.map(it => {
+            return {
+                ...it,
+                dateRange: new DateRange(new Date(it.dateRange.from), new Date(it.dateRange.to))
+            }
+        })
+    }
+
+    async getCustomEvents(): Promise<MyEvent[]> {
+        const rawEvents = await this.genericGet<MyEvent[]>(["custom"])
         return rawEvents.map(it => {
             return {
                 ...it,
@@ -58,7 +83,7 @@ export default class API {
     }
 
     async getMeetings(): Promise<MyMeeting[]> {
-        const rawMeetings = await this.genericPost<MyMeeting[]>("get", ["meetings"])
+        const rawMeetings = await this.genericGet<MyMeeting[]>(["meetings"])
         return rawMeetings.map(it => {
             return {
                 ...it,
@@ -69,11 +94,15 @@ export default class API {
     }
 
     async getToDos(): Promise<MyToDo[]> {
-        const rawMeetings = await this.genericPost<MyToDo[]>("get", ["todos"])
+        const rawMeetings = await this.genericGet<MyToDo[]>(["todos"])
         return rawMeetings.map(it => {
             return {
                 ...it
             }
         })
+    }
+
+    async addToDo(toDo: MyToDo): Promise<ServerResponse> {
+        return await this.genericPost<MyToDo[], MyToDo>(["todos", "add"], toDo)
     }
 }

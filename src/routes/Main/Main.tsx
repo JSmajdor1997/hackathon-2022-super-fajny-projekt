@@ -16,17 +16,23 @@ import MyMeeting from "../../API/MyMeeting";
 import formatHour from "../../utils/formatHour";
 import addToDate from "../../utils/addToDate";
 import { Difficulty } from "../../API/Difficulty";
+import MyToDo from "../../API/MyToDo";
+import { ThemeColors } from "../../ThemeColors";
 
 export default function Main() {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [isToDoDrawerOpen, setIsToDoDrawerOpen] = useState(false)
   const [eventForDetails, setEventForDetails] = useState<MyEvent | null>(null)
   const [events, setEvents] = useState<MyEvent[]>([])
+  const [customEvents, setCustomEvents] = useState<MyEvent[]>([])
+  const [toDos, setToDos] = useState<MyToDo[]>([])
   const [meetings, setMeetings] = useState<MyMeeting[]>([])
   useEffect(() => {
     const api = new API()
     api.getEvents(currentDate).then(setEvents)
     api.getMeetings().then(setMeetings)
+    api.getToDos().then(setToDos)
+    api.getCustomEvents().then(setCustomEvents)
   }, [])
 
   const navigate = useNavigate()
@@ -61,7 +67,8 @@ export default function Main() {
       <div className={styles["scrollable"]}>
         <Calendar<MyEvent>
           className={styles["calendar"]}
-          events={[...events, ...(events.findIndex(it => it.id == eventForDetails?.id)==-1 && eventForDetails != null ? [eventForDetails] : [])]}
+          events={events}
+          customEvents={customEvents}
           date={currentDate}
           onAddEventRequest={newDate => setEventForDetails({
             dateRange: new DateRange(newDate, addToDate(newDate, TimeEnum.Hour)),
@@ -76,11 +83,14 @@ export default function Main() {
           })}
           renderEvent={event => (
             <EventItem 
+              style={{backgroundColor: ThemeColors.Work}}
               event={event} 
               onShowDetails={onEventClick}/>
           )}/>
+      </div>
 
-        <ToDoDrawer
+      <ToDoDrawer
+          toDos={toDos}
           onMuteApp={()=>{}}
           onOpenSettings={()=>{}}
           meetings={meetings}
@@ -92,7 +102,6 @@ export default function Main() {
         <EventDetailsDrawer 
           event={eventForDetails}
           onClose={onEventDetailsDrawerClose}/>
-      </div>
     </div>
   );
 }

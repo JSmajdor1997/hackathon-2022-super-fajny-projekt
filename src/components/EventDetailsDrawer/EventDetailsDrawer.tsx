@@ -52,7 +52,7 @@ export default function EventDetailsDrawer(props: Props) {
                 </div>
 
                 <div className={styles["map-container"]}>
-                    Jestem sobie mapą
+                    <img src="/images/map.png"/>
                 </div>
             </React.Fragment>
         )

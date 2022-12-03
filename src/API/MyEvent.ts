@@ -1,6 +1,5 @@
 import DateRange from "../utils/DateRange"
 import { Difficulty } from "./Difficulty"
-import Tag from "./Tag"
 
 export default interface MyEvent {
     id: string
@@ -8,7 +7,7 @@ export default interface MyEvent {
     summary: string
     description: string
     location: string | null
-    tag: Tag[]
+    tag: string[]
     difficulty: Difficulty
     progress: number
     travelTimeMs: number
