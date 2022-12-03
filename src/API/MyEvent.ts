@@ -1,14 +1,6 @@
 import DateRange from "../utils/DateRange"
-
-export interface Tag {
-    name: string
-}
-
-export enum Difficulty {
-    Easy = "Easy",
-    Medium = "Medium",
-    Hard = "Hard"
-}
+import { Difficulty } from "./Difficulty"
+import Tag from "./Tag"
 
 export default interface MyEvent {
     id: string

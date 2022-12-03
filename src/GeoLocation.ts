@@ -1,5 +1,10 @@
+export interface Position {
+    latitude: number
+    longitude: number
+}
+
 export default class GeoLocation {
-    static getLocation(): Promise<{latitude: number, longitude: number} | null> {
+    static getLocation(): Promise<Position | null> {
         return new Promise((resolve, reject) => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((it) => {
