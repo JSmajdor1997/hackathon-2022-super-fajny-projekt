@@ -80,10 +80,6 @@ export default function ToDoDrawer(props: Props) {
                 renderItem={it => (
                     <MeetingItem meeting={it} key={it.id}/>
                 )}/>
-
-            <SimpleButton onClick={props.onLogOut} className={styles["logout-button"]}>
-                Wyloguj się
-            </SimpleButton>
             </div>
         </Drawer>
 )

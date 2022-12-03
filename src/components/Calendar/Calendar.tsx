@@ -18,7 +18,6 @@ export interface Props<T extends Event> extends Styllable {
     onAddEventRequest: (startingDate: Date)=>void
 
     events: T[]
-    customEvents: T[]
     renderEvent: (event: T)=>ReactElement
 }
 
@@ -64,7 +63,7 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
 
     private readonly renderEventContainer = (event: T) => {
         const size = this.calculateEventSize(event)
-
+        
         return (
             <div
                 key={event.id}
@@ -138,7 +137,7 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
     }
 
     render() {
-        const {style, className, events, customEvents} = this.props
+        const {style, className, events} = this.props
 
         return (
             <div 
@@ -150,7 +149,6 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
 
                 {this.renderCurrentTimeIndicator()}
 
-                {customEvents.map(this.renderEventContainer)}
                 {events.map(this.renderEventContainer)}
             </div>
         )

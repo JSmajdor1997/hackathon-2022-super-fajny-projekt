@@ -7,7 +7,7 @@ import ToDoDrawer from "../../components/ToDoDrawer/ToDoDrawer";
 import styles from "./styles.module.css"
 import { TimeEnum } from "../../utils/TimeEnum";
 import API from "../../API/API";
-import MyEvent from "../../API/MyEvent";
+import MyEvent, { isMyCustomEvent, MyCustomEvent } from "../../API/MyEvent";
 import { RoutesEnum } from "../RoutesEnum";
 import EventItem from "../../components/EventItem/EventItem";
 import EventDetailsDrawer from "../../components/EventDetailsDrawer/EventDetailsDrawer";
@@ -18,13 +18,14 @@ import addToDate from "../../utils/addToDate";
 import { Difficulty } from "../../API/Difficulty";
 import MyToDo from "../../API/MyToDo";
 import { ThemeColors } from "../../ThemeColors";
+import MyEventItem from "../../components/MyEventItem/MyEventItem";
 
 export default function Main() {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [isToDoDrawerOpen, setIsToDoDrawerOpen] = useState(false)
   const [eventForDetails, setEventForDetails] = useState<MyEvent | null>(null)
   const [events, setEvents] = useState<MyEvent[]>([])
-  const [customEvents, setCustomEvents] = useState<MyEvent[]>([])
+  const [customEvents, setCustomEvents] = useState<MyCustomEvent[]>([])
   const [toDos, setToDos] = useState<MyToDo[]>([])
   const [meetings, setMeetings] = useState<MyMeeting[]>([])
   useEffect(() => {
@@ -65,10 +66,9 @@ export default function Main() {
         onHamburgerStateChanged={onHamburgerStateChanged}/>
       
       <div className={styles["scrollable"]}>
-        <Calendar<MyEvent>
+        <Calendar<MyEvent|MyCustomEvent>
           className={styles["calendar"]}
-          events={events}
-          customEvents={customEvents}
+          events={[...events, ...customEvents]}
           date={currentDate}
           onAddEventRequest={newDate => setEventForDetails({
             dateRange: new DateRange(newDate, addToDate(newDate, TimeEnum.Hour)),
@@ -82,10 +82,13 @@ export default function Main() {
             travelTimeMs: 0
           })}
           renderEvent={event => (
-            <EventItem 
-              style={{backgroundColor: ThemeColors.Work}}
-              event={event} 
-              onShowDetails={onEventClick}/>
+            isMyCustomEvent(event) ?
+              <MyEventItem event={event}
+               onShowDetails={()=>{}}/> :
+              <EventItem 
+                style={{backgroundColor: ThemeColors.Work}}
+                event={event} 
+                onShowDetails={onEventClick}/>
           )}/>
       </div>
 

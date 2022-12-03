@@ -12,3 +12,16 @@ export default interface MyEvent {
     progress: number
     travelTimeMs: number
 }
+
+export interface MyCustomEvent {
+    id: string
+    name: string 
+    taskprogress: number
+    difficulty: Difficulty
+    tag: string[]
+    dateRange: DateRange
+}
+
+export function isMyCustomEvent(item: MyEvent | MyCustomEvent): item is MyCustomEvent {
+    return (item as MyEvent).travelTimeMs == undefined;
+}
