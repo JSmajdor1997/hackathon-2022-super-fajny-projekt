@@ -4,6 +4,7 @@
     height: 100%;
     display: flex;
     align-items: center;
+    color: white;
 }
 
 .icon-container {
@@ -25,9 +26,15 @@
 }
 
 .title {
-
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .location-or-description {
+    font-size: 14px;
+}
 
+.from {
+    font-weight: bold;
+    font-size: 18px;
 }

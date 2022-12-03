@@ -1,6 +1,9 @@
 .root {
+    width: 100%;
     display: flex;
+    justify-content: end;
     position: relative;
+    /*margin-right: 20px;*/
 }
 
 .current-time-indicator {
@@ -13,25 +16,27 @@
 
 .event-container {
     position: absolute;
-    margin-left: 10%;
-    width: 90%;
+    width: 83%;
+    /*margin-left: 10%;*/
 }
 
 .time-scale-container {
     position: absolute;
     display: flex;
-    width: 100%;
+    width: 95%;
     align-items: center;
+    margin: 0 auto;
 }
 
 .time-scale-label {
+    color: var(--text-darker);
     margin-left: 2px;
     font-size: 12px;
 }
 
 .time-scale-line {
     height: 1px;
-    background-color: black;
+    background-color: var(--text-darker);
     margin-left: 10px;
     flex: 1;
 }

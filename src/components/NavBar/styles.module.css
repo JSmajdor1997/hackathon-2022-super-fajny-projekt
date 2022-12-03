@@ -2,19 +2,21 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    color: var(--text-darker);
 }
 
 .upper-part {
     display: flex;
     flex: 1;
     justify-content: flex-end;
+    margin: 20px 25px 8px 0;
 }
 
 .lower-part {
     display: flex;
     justify-content: space-between;
-    padding-left: 4px;
-    padding-right: 4px;
+    align-items: end;
+    margin: 0 30px;
     font-size: 22px;
 }
 
@@ -23,7 +25,7 @@
 }
 
 .day-name-label {
-
+    font-size: 20px;
 }
 
 .date-container {

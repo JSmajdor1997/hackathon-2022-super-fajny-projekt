@@ -1,8 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Inter');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  /*font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',*/
+  /*  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',*/
+  /*  sans-serif;*/
+  font-family: 'Inter', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --text-darker: #4B4B4B;
+  --text-black: #797979;
+  --line-under-bubble: #E8E8E8;
+  --self-care: #43978D;
+  --random: #368CB0;
+  --work: #E15B35;
+  --yellow: #F0A719;
+  --light-gray: #A19F9F;
 }
