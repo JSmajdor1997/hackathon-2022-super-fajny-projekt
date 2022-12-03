@@ -1,7 +1,6 @@
 import { Component, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import Calendar from "../../components/Calendar/Calendar"
-import EventDetailsDrawer from "../../components/EventDetailsDrawer/EventDetailsDrawer";
 import NavBar from "../../components/NavBar/NavBar";
 import DateRange from "../../utils/Range"
 import ToDoDrawer from "../../components/ToDoDrawer/ToDoDrawer";
@@ -70,10 +69,6 @@ export default function Main() {
       <ToDoDrawer 
         isOpen={isToDoDrawerOpen} 
         onClose={onToDoDrawerClose}/>
-
-      <EventDetailsDrawer 
-        isOpen={isEventDetailsDrawerOpen} 
-        onClose={onEventDetailsDrawerClose}/>
     </div>
   );
 }
