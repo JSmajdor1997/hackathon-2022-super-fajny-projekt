@@ -28,6 +28,7 @@ export default class API {
         return json;
     }
 
+<<<<<<< HEAD
     private async genericGet<T>(paths: string[]): Promise<T> {
         const pathsAsString = paths.reduce((acc, it) => acc + `/${it}`)
         
@@ -56,6 +57,12 @@ export default class API {
 
     async getCustomEvents(): Promise<MyEvent[]> {
         const rawEvents = await this.genericGet<MyEvent[]>(["custom"])
+=======
+    async getEvents(date: Date): Promise<MyEvent[]> {
+        const dateAsString = `${date.getFullYear()}-${normalizeLength((date.getMonth()+1).toString(), 2, '0', Side.Left)}-${normalizeLength(date.getDate().toString(), 2, '0', Side.Left)}`
+
+        const rawEvents = await this.genericPost<MyEvent[]>("get", ["events", dateAsString])
+>>>>>>> 89ad79b (fix(Calendar): fixed Filip's features)
         return rawEvents.map(it => {
             return {
                 ...it,
