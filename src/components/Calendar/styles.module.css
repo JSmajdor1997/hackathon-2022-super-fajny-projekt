@@ -16,8 +16,7 @@
 
 .event-container {
     position: absolute;
-    width: 83%;
-    /*margin-left: 10%;*/
+    margin-left: 15%;
 }
 
 .time-scale-container {

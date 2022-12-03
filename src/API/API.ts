@@ -27,10 +27,10 @@ export default class API {
         return json;
     }
 
-    async getEvents(date: Date, position: Position | null): Promise<MyEvent[]> {
+    async getEvents(date: Date): Promise<MyEvent[]> {
         const dateAsString = `${date.getFullYear()}-${normalizeLength((date.getMonth()+1).toString(), 2, '0', Side.Left)}-${normalizeLength(date.getDate().toString(), 2, '0', Side.Left)}`
 
-        const rawEvents = await this.genericPost<MyEvent[]>("get", ["events", dateAsString, position?.latitude.toString() ?? '0', position?.longitude.toString() ?? '0'])
+        const rawEvents = await this.genericPost<MyEvent[]>("get", ["events", dateAsString])
         return rawEvents.map(it => {
             return {
                 ...it,

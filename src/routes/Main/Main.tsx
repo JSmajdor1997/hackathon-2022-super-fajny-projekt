@@ -24,11 +24,9 @@ export default function Main() {
   const [events, setEvents] = useState<MyEvent[]>([])
   const [meetings, setMeetings] = useState<MyMeeting[]>([])
   useEffect(() => {
-    GeoLocation.getLocation().then(position=>{
-      const api = new API()
-      api.getEvents(currentDate, position).then(setEvents)
-      api.getMeetings().then(setMeetings)
-    })
+    const api = new API()
+    api.getEvents(currentDate).then(setEvents)
+    api.getMeetings().then(setMeetings)
   }, [])
 
   const navigate = useNavigate()
