@@ -4,7 +4,7 @@
     border-style: solid;
     border-color: var(--random);
     display: flex;
-    margin-top: 10px;
+    margin-top: 15px;
     color: var(--text-darker);
 }
 

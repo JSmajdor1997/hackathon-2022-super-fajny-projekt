@@ -5,15 +5,19 @@ export interface Props {
     isHamburgerOn: boolean
     onHamburgerStateChanged: (newState: boolean) => void
     date?: Date
+    hamburgerPosition: "left" | "right"
 }
 
 export default function NavBar(props: Props) {
-    const {isHamburgerOn, onHamburgerStateChanged, date} = props
+    const {isHamburgerOn, onHamburgerStateChanged, date, hamburgerPosition} = props
 
     return (
         <div className={styles["root"]}>
-            <div className={styles["upper-part"]}>
-                <Hamburger size={28} toggled={isHamburgerOn} color="black" toggle={()=>onHamburgerStateChanged(!isHamburgerOn)} />
+            <div className={styles["upper-part"]} style={{justifyContent: hamburgerPosition == "left" ? "flex-start":"flex-end"}}>
+                {hamburgerPosition == 'left' ? 
+                    <img style={{cursor: "pointer", width: 15, marginLeft: 25}} src="/images/chevron-left.png" onClick={()=>onHamburgerStateChanged(!isHamburgerOn)}/> :
+                    <Hamburger size={28} toggled={isHamburgerOn} color="black" toggle={()=>onHamburgerStateChanged(!isHamburgerOn)} />
+                    }
             </div>
 
             {

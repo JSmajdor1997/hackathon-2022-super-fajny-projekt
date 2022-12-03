@@ -33,7 +33,7 @@ export default function ToDoDrawer(props: Props) {
             onClose={props.onClose}
             direction="right"
             className={styles["root"]}>
-            <NavBar isHamburgerOn={props.isOpen} onHamburgerStateChanged={props.onClose}/>
+            <NavBar hamburgerPosition="left" isHamburgerOn={props.isOpen} onHamburgerStateChanged={props.onClose}/>
 
             <div className={styles["content-container"]}>
             <SimpleList 

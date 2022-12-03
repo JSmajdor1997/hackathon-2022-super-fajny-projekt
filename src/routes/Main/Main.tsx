@@ -61,6 +61,7 @@ export default function Main() {
   return (
     <div className={styles["root"]}>
       <NavBar
+        hamburgerPosition="right"
         date={currentDate} 
         isHamburgerOn={isToDoDrawerOpen}
         onHamburgerStateChanged={onHamburgerStateChanged}/>
