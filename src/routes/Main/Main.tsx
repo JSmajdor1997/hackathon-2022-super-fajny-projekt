@@ -11,6 +11,7 @@ import MyEvent from "../../API/MyEvent";
 import { RoutesEnum } from "../RoutesEnum";
 import EventItem from "../../components/EventItem/EventItem";
 import EventDetailsDrawer from "../../components/EventDetailsDrawer/EventDetailsDrawer";
+import GeoLocation from "../../GeoLocation";
 
 export default function Main() {
   const [currentDate, setCurrentDate] = useState(new Date())
