@@ -12,14 +12,20 @@ import { RoutesEnum } from "../RoutesEnum";
 import EventItem from "../../components/EventItem/EventItem";
 import EventDetailsDrawer from "../../components/EventDetailsDrawer/EventDetailsDrawer";
 import GeoLocation from "../../GeoLocation";
+import MyMeeting from "../../API/MyMeeting";
 
 export default function Main() {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [isToDoDrawerOpen, setIsToDoDrawerOpen] = useState(false)
   const [eventForDetails, setEventForDetails] = useState<MyEvent | null>(null)
   const [events, setEvents] = useState<MyEvent[]>([])
+  const [meetings, setMeetings] = useState<MyMeeting[]>([])
   useEffect(() => {
-    new API().getEvents(currentDate).then(setEvents)
+    GeoLocation.getLocation().then(position=>{
+      const api = new API()
+      api.getEvents(currentDate, position).then(setEvents)
+      api.getMeetings().then(setMeetings)
+    })
   }, [])
 
   const navigate = useNavigate()
@@ -62,9 +68,13 @@ export default function Main() {
               onShowDetails={onEventClick}/>
           )}/>
 
-        <ToDoDrawer 
+        <ToDoDrawer
+          onMuteApp={()=>{}}
+          onOpenSettings={()=>{}}
+          meetings={meetings}
           isOpen={isToDoDrawerOpen} 
           onClose={onToDoDrawerClose}
+          onAddTask={()=>{}}
           onLogOut={onLogout}/>
 
         <EventDetailsDrawer 

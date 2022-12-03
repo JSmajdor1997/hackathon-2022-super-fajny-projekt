@@ -1,4 +1,4 @@
-import { Difficulty } from "./API/MyEvent";
+import { Difficulty } from "./API/Difficulty"
 
 export default class Theme {
     static difficultyToColor(difficulty: Difficulty): string {

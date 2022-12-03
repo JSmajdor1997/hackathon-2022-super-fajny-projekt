@@ -7,13 +7,19 @@ import MeetingItem from "../MeetingItem/MeetingItem"
 import TaskItem from "../TaskItem/TaskItem"
 import NavBar from "../NavBar/NavBar"
 import SimpleButton from "../SimpleButton/SimpleButton"
-import { Difficulty } from "../../API/MyEvent"
+import MyMeeting from "../../API/MyMeeting"
+import { Difficulty } from "../../API/Difficulty"
 
 export interface Props {
     isOpen: boolean
     onClose: ()=>void
 
     onLogOut: ()=>void
+
+    meetings: MyMeeting[]
+    onOpenSettings: ()=>void
+    onMuteApp: ()=>void
+    onAddTask: ()=>void
 }
 
 export default function ToDoDrawer(props: Props) {
@@ -35,7 +41,7 @@ export default function ToDoDrawer(props: Props) {
                         Twoje zadania
                         <img src="/images/add-icon.png"/>
                     </div>
-                } 
+                }
                 className={styles["tasks-section"]}
                 renderItem={it => (
                     <TaskItem key={it} difficulty={Difficulty.Easy}/>
@@ -43,10 +49,10 @@ export default function ToDoDrawer(props: Props) {
 
             <div className={styles["middle-section"]}>
                 <div className={styles["left"]}>
-                    <img src="https://i.gremicdn.pl/image/free/2042e815ec347f2c640c04c12ac26941/?t=crop:1920:1191:nowe:0:86,resize:fill:408:255,enlarge:1"/>
+                    <img src="/images/people/4.jpg"/>
 
                     <div className={styles["name"]}>
-                        Elon Musk
+                        Władek Rodriguez
                     </div>
                 </div>
 
@@ -62,7 +68,7 @@ export default function ToDoDrawer(props: Props) {
             </div>
 
             <SimpleList 
-                items={["1", "2"]}
+                items={props.meetings}
                 header={
                     <div className={styles["header"]}>
                         A może spotkanie?
@@ -70,7 +76,7 @@ export default function ToDoDrawer(props: Props) {
                 }
                 className={styles["meetings-section"]}
                 renderItem={it => (
-                    <MeetingItem key={it}/>
+                    <MeetingItem meeting={it} key={it.id}/>
                 )}/>
 
             <SimpleButton onClick={props.onLogOut} className={styles["logout-button"]}>

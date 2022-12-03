@@ -1,4 +1,4 @@
-import { Difficulty } from "../../API/MyEvent"
+import { Difficulty } from "../../API/Difficulty"
 import Theme from "../../Theme"
 import mergeClassesNames from "../../utils/mergeClassNames"
 import Styllable from "../../utils/Styllable"
