@@ -1,0 +1,82 @@
+.root {
+    display: flex;
+    flex-direction: column;
+}
+
+.tasks-section {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+}
+
+.tasks-section .header {
+
+}
+
+.tasks-section .list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.middle-section {
+    display: flex;
+    background-color: pink;
+}
+
+.middle-section .left {
+    flex: 2;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.middle-section .left img {
+    object-fit: cover;
+    background-color: yellow;
+    border-radius: 100%;
+    height: 50%;
+    width: 50%;
+}
+
+.middle-section .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.middle-section .right .button {
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin: 5px;
+}
+
+.meetings-section {
+    background-color: green;
+    flex: 1;
+}
+
+.mute-button {
+    background-color: blue;
+}
+
+.settings-button {
+    background-color: brown;
+}
+
+.logout-section {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    font-family: Avenir;
+    letter-spacing: 3px;
+}

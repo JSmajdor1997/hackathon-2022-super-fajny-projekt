@@ -1,0 +1,14 @@
+.root {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}

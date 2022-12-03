@@ -1,0 +1,23 @@
+.root {
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    display: flex;
+}
+
+.photo-container {
+    display: flex;
+    flex: 1;
+    padding: 10px;
+}
+
+.photo-container img {
+    height: 50px;
+    border-radius: 100%;
+    aspect-ratio: 1;
+}
+
+.info-container {
+    
+}

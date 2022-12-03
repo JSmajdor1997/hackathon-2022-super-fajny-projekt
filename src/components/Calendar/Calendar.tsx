@@ -1,17 +1,18 @@
 import React from "react"
 import { Component, ReactElement } from "react"
 import mergeClassesNames from "../../utils/mergeClassNames"
-import DateRange from "../../utils/Range"
+import DateRange from "../../utils/DateRange"
+import Styllable from "../../utils/Styllable"
 import { TimeEnum } from "../../utils/TimeEnum"
 import styles from "./styles.module.css"
+import { normalizeLength, Side } from "../../utils/formatHour"
 
 export interface Event {
     dateRange: DateRange
+    id: string
 }
 
-export interface Props<T extends Event> {
-    className?: string
-    style?: React.CSSProperties
+export interface Props<T extends Event> extends Styllable {
     date: Date
 
     events: T[]
@@ -32,7 +33,7 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
     }
 
     private rootResizeObserver: ResizeObserver | null = null
-    private containerRef = React.createRef<HTMLDivElement>();
+    private rootRef = React.createRef<HTMLDivElement>();
 
     private calculateEventSize(event: T): {marginTop: number, height: number} {
         const pxPerMs = this.state.rootHeight / (TimeEnum.Hour*24)
@@ -45,12 +46,12 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
     componentDidMount() {
         this.rootResizeObserver = new ResizeObserver(() => {
             this.setState({
-                rootHeight: (this.containerRef.current?.getBoundingClientRect().height || 0) * 2
+                rootHeight: (this.rootRef.current?.getBoundingClientRect().height || 0) * 2
             })
           });
       
-          if(this.containerRef.current != null) {
-            this.rootResizeObserver.observe(this.containerRef.current);
+          if(this.rootRef.current != null) {
+            this.rootResizeObserver.observe(this.rootRef.current);
           }
     }
 
@@ -63,28 +64,26 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
 
         return (
             <div
-                style={{height: size.height, top: size.marginTop, backgroundColor: "pink"}}
+                key={event.id}
+                style={{height: size.height, top: size.marginTop}}
                 className={styles["event-container"]}>
                 {this.props.renderEvent(event)}
             </div>
         )
     }
 
-    private readonly renderTimeScales = () => {
-        function normalize(str: string): string {
-            return str.length == 1 ?
-                `0${str}` :
-                str
-        }
-            
+    private readonly renderTimeScales = () => {            
         const pxPerMs = this.state.rootHeight / (TimeEnum.Hour*24)
 
         return new Array<number>(24)
             .fill(0)
             .map((_, index)=>(
-                <div className={styles["time-scale-container"]} style={{marginTop: index * TimeEnum.Hour * pxPerMs}}>
+                <div 
+                    key={index.toString()}
+                    className={styles["time-scale-container"]} 
+                    style={{marginTop: index * TimeEnum.Hour * pxPerMs}}>
                     <div className={styles["time-scale-label"]}>
-                        {normalize((index+1).toString())}:00
+                        {normalizeLength((index+1).toString(), 2, '0', Side.Left)}:00
                     </div>
 
                     <div className={styles["time-scale-line"]}/>
@@ -108,7 +107,7 @@ export default class Calendar<T extends Event> extends Component<Props<T>, State
 
         return (
             <div 
-                ref={this.containerRef} 
+                ref={this.rootRef} 
                 style={style} 
                 className={mergeClassesNames([styles["root"], className])}>
                 {this.renderTimeScales()}
