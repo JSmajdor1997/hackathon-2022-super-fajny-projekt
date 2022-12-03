@@ -1,34 +1,39 @@
 .root {
-    border-radius: 10px;
-    border-width: 2px;
+    border-radius: 8px;
+    border-width: 1px;
     border-style: solid;
-    border-color: #000000;
+    border-color: var(--random);
     display: flex;
     margin-top: 10px;
+    color: var(--text-darker);
 }
 
 .photo-container {
+    margin: 10px 70px 10px 10px;
     display: flex;
     padding: 10px;
 }
 
 .photo-container img {
-    height: 50px;
+    height: 64px;
     border-radius: 100%;
     aspect-ratio: 1;
 }
 
 .info-container {
     flex: 1;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .name {
+    margin-top: 15px;
+    margin-bottom: 10px;
     font-weight: bold;
     letter-spacing: 2px;
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .time-suggestion {
-
+    font-size: 14px;
 }

@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    overflow: hidden;
+    color: var(--text-darker);
 }
 
 .content-container {
@@ -17,7 +17,7 @@
 
 .header {
     display: flex;
-    font-size: 20px;
+    font-size: 24px;
     letter-spacing: 2px;
     font-weight: bold;
     justify-content: space-between;
@@ -29,14 +29,19 @@
 }
 
 .location {
-
+    color: var(--text-black);
+    margin-top: 10px;
+    font-size: 16px;
 }
 
 .description {
-
+    margin-top: 20px;
+    font-size: 16px;
+    color: var(--text-darker);
 }
 
 .progress {
+    margin-top: 10px;
     width: 100%;
     height: 100px;
 }
@@ -45,21 +50,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 20px;
+    height: 50px;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .progress-thumb {
-    width: 15px;
-    height: 15px;
-    background-color: pink;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 100px;
+    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+}
+
+.progress-thumb:active {
+    border-color: transparent;
 }
 
 .progress-track {
+    --alpha: 0.8;
     width: 100%;
     max-width: 100%;
-    height: 5px;
-    background-color: green;
+    height: 10px;
+    background-color: var(--random);
+    border-radius: 10px;
 }
 
 .map-container {
@@ -68,4 +82,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.indicator {
+    margin-left: 10px;
+}
+
+.progress-title {
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 30px;
 }

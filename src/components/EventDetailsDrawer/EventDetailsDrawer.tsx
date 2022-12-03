@@ -22,7 +22,7 @@ export default function EventDetailsDrawer(props: Props) {
                     <div className={styles["title"]}>
                         {summary}
 
-                        <DifficultyDisplay color="black" difficulty={difficulty}/>
+                        <DifficultyDisplay color="black" difficulty={difficulty} className={styles["indicator"]}/>
                     </div>
     
                     <div className={styles["hour"]}>
@@ -36,6 +36,10 @@ export default function EventDetailsDrawer(props: Props) {
     
                 <div className={styles["description"]}>
                     {description}
+                </div>
+
+                <div className={styles["progress-title"]}>
+                    Progres
                 </div>
     
                 <div className={styles["progress"]}>
