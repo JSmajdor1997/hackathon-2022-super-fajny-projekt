@@ -5,6 +5,6 @@ export enum ThemeColors {
     SelfCare = "#43978D",
     Random = "#368CB0",
     Work = "#E15B35",
-    Yellow = "#F0A719",
+    Yellow = "#F0A71988",
     LightGray = "#A19F9F"
 }

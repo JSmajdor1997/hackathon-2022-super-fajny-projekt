@@ -25,22 +25,21 @@ export default function MyEventItem(props: Props) {
         <div
             className={mergeClassesNames([styles["root"], props.className])}
             onClick={()=>props.onShowDetails(props.event)} 
-            style={{...props.style, backgroundColor: colors[tag[0]]}}>
+            style={{...props.style, backgroundColor: tag[0] in colors ? colors[tag[0]] : ThemeColors.Work, opacity: 0.9}}>
             <div className={styles["icon-container"]} >
                 <img src="/images/idea-icon.png"/>
             </div>
 
-            <div className={styles["main-container"]}>
-                <div className={styles["title"]}>
-                    {name}
+            <div style={{display: "flex", flexDirection: "column", flex: 1}}>
+                <div className={styles["main-container"]}>
+                    {"summary" in props.event ? (props.event as any)["summary"] : name}
                 </div>
 
-                <DifficultyDisplay color="black" difficulty={difficulty}/>
+                <div style={{overflow: "hidden", textOverflow: "ellipsis"}}>
+                    {(props.event as any)["description"]}
+                </div>
             </div>
-
-            <div>
-                PROGRESS: {taskprogress}
-            </div>
+            
 
             <div className={styles["hours-container"]}>
                 <div className={styles["from"]}>

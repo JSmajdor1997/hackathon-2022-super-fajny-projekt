@@ -1,9 +1,9 @@
-.root {
-    width: 100vw;    
+.root { 
     height: 100vh;  
     display: flex;
     flex-direction: column;  
     overflow: hidden;
+    padding-right: 25px;
 }
 
 .scrollable {
@@ -15,6 +15,6 @@
 
 .calendar {
     flex: 1;
-    height: 200vh;
+    height: 800px;
     margin-top: 20px;
 }

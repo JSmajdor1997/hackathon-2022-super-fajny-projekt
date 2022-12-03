@@ -82,10 +82,17 @@ export default function Main() {
             travelTimeMs: 0
           })}
           renderEvent={event => (
+            event.tag[0] == "Grey" ?
+            <div style={{width: "100%", backgroundColor: "grey", marginTop: 2, borderRadius: 10, display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+              <img src="/images/car-icon.png" style={{marginTop: 7, marginLeft: 4}}/>
+
+              <div style={{color: "white", marginRight: 7}}>30 min.</div>
+            </div> :
             isMyCustomEvent(event) ?
-              <MyEventItem event={event}
+              <MyEventItem key={event.id} event={event}
                onShowDetails={()=>{}}/> :
               <EventItem 
+              key={event.id}
                 style={{backgroundColor: ThemeColors.Work}}
                 event={event} 
                 onShowDetails={onEventClick}/>
